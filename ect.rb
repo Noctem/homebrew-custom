@@ -7,15 +7,22 @@ class Ect < Formula
 
   depends_on "cmake" => :build
   depends_on "nasm" => :build
-  depends_on "boost" => :recommended
+  depends_on "boost" => :optional
 
   def install
-    if build.with? "boost"
-      ENV.append "CXXFLAGS", "-DBOOST_SUPPORTED"
-      ENV.append "LDFLAGS", "-flto -lboost_filesystem -lboost_system"
-    end
+    if build.head?
+      args = std_cmake_args
+      args << '-DECT_FOLDER_SUPPORT=ON' if build.with? "boost"
 
-    system "make", "-C", "src"
+      system "cmake", "src", *args
+      system "make"
+    else
+      if build.with? "boost"
+        ENV.append "CXXFLAGS", "-DBOOST_SUPPORTED"
+        ENV.append "LDFLAGS", "-lboost_filesystem -lboost_system"
+      end
+      system "make", "-C", "src"
+    end
     bin.install "ECT"
   end
 
