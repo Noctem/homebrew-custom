@@ -1,15 +1,8 @@
 class Mkvtoolnix < Formula
   desc "Matroska media files manipulation tools"
   homepage "https://mkvtoolnix.download/"
-  url "https://mkvtoolnix.download/sources/mkvtoolnix-31.0.0.tar.xz"
-  sha256 "f98a8c3a00e48ceb9a56ec5cb1f89b7663bbc5ace88713f9f087fdaaa2501b35"
-
-  bottle do
-    cellar :any
-    sha256 "0709bb1a2c0fe4f897a6dfdc20a14e3b98dbe324d83d04b0aaf7a41f0e995dff" => :mojave
-    sha256 "4a3e05604e716d16a638ad9afd0733c35b29dcd4fc6f3aa13f60877e55a6dc36" => :high_sierra
-    sha256 "d9df1172b5b51eaf1dffcc82eae86245777acb3fd195cb5fea943c12640ad56b" => :sierra
-  end
+  url "https://mkvtoolnix.download/sources/mkvtoolnix-32.0.0.tar.xz"
+  sha256 "4bddae1f92360ac350283178353f92564dfa8570e09f17e46036a8a43b90953d"
 
   head do
     url "https://gitlab.com/mbunkus/mkvtoolnix.git"
@@ -32,12 +25,6 @@ class Mkvtoolnix < Formula
   depends_on "libogg"
   depends_on "libvorbis"
   depends_on "qt"
-
-  patch do
-    url "https://gitlab.com/mbunkus/mkvtoolnix/commit/71865d9081c2a9f65039012abd3a7ff8676d642a.diff"
-    sha256 "851a2be9a29d2d1f65ab7536f6cd0c212170376bb59526897df636aad38b8cad"
-  end
-
 
   def install
     ENV.cxx11
