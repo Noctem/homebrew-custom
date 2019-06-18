@@ -22,8 +22,6 @@ class FfmpegIina < Formula
   depends_on "libass"
   depends_on "libbluray"
   depends_on "libsoxr"
-  depends_on "libvpx"
-  depends_on "openjpeg"
   depends_on "rtmpdump"
   depends_on "rubberband"
   depends_on "snappy"
@@ -47,18 +45,17 @@ class FfmpegIina < Formula
       --enable-libbluray
       --enable-librubberband
       --enable-libsnappy
-      --enable-libvpx
       --enable-libfontconfig
       --enable-libfreetype
       --enable-libass
-      --enable-libopenjpeg
       --enable-librtmp
       --enable-videotoolbox
       --disable-libjack
       --disable-indev=jack
       --enable-libsoxr
-      --disable-encoders
       --disable-doc
+      --disable-encoders
+      --disable-programs
       --disable-muxers
     ]
 

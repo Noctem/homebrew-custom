@@ -18,7 +18,6 @@ class Vapoursynth < Formula
   depends_on "libass"
   depends_on :macos => :el_capitan # due to zimg dependency
   depends_on "python"
-  depends_on "tesseract"
   depends_on "zimg"
 
   def install
