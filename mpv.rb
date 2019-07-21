@@ -1,23 +1,25 @@
 class Mpv < Formula
   desc "Media player based on MPlayer and mplayer2"
   homepage "https://mpv.io"
-  url "https://github.com/mpv-player/mpv/archive/v0.29.1.tar.gz"
-  sha256 "f9f9d461d1990f9728660b4ccb0e8cb5dce29ccaa6af567bec481b79291ca623"
   revision 3
+
+  stable do
+    url "https://github.com/mpv-player/mpv/archive/v0.29.1.tar.gz"
+    sha256 "f9f9d461d1990f9728660b4ccb0e8cb5dce29ccaa6af567bec481b79291ca623"
+
+    depends_on "noctem/custom/ffmpeg"
+  end
+
   head do
     url "https://github.com/mpv-player/mpv.git"
 
-    patch do
-      url "https://github.com/mpv-player/mpv/pull/6703.diff?full_index=1"
-      sha256 "12f79251590c8852708b3d151e18622bcf4971e5b749bff1657d5287ff382461"
-    end
+    depends_on "noctem/custom/ffmpeg-git"
   end
 
   depends_on "docutils" => :build
   depends_on "pkg-config" => :build
   depends_on "python" => :build
 
-  depends_on "noctem/custom/ffmpeg"
   depends_on "jpeg"
   depends_on "libarchive"
   depends_on "libass"

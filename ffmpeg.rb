@@ -4,6 +4,7 @@ class Ffmpeg < Formula
   url "https://ffmpeg.org/releases/ffmpeg-4.1.4.tar.xz"
   sha256 "f1f049a82fcfbf156564e73a3935d7e750891fab2abf302e735104fd4050a7e1"
   head "https://github.com/FFmpeg/FFmpeg.git"
+  revision 1
 
   depends_on "nasm" => :build
   depends_on "pkg-config" => :build
