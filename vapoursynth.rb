@@ -3,8 +3,8 @@ class Vapoursynth < Formula
 
   desc "Video processing framework with simplicity in mind"
   homepage "http://www.vapoursynth.com"
-  url "https://github.com/vapoursynth/vapoursynth/archive/R46.tar.gz"
-  sha256 "e0b6e538cc54a021935e89a88c5fdae23c018873413501785c80b343c455fe7f"
+  url "https://github.com/vapoursynth/vapoursynth/archive/R47.tar.gz"
+  sha256 "4ee53e04066ffce0f962ce5e884749b9bfa814f78cce035ed3a51d8cddc87830"
   head "https://github.com/vapoursynth/vapoursynth.git"
 
   depends_on "autoconf" => :build
