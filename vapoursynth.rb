@@ -3,15 +3,14 @@ class Vapoursynth < Formula
 
   desc "Video processing framework with simplicity in mind"
   homepage "http://www.vapoursynth.com"
-  url "https://github.com/vapoursynth/vapoursynth/archive/R47.tar.gz"
-  sha256 "4ee53e04066ffce0f962ce5e884749b9bfa814f78cce035ed3a51d8cddc87830"
+  url "https://github.com/vapoursynth/vapoursynth/archive/R47.1.tar.gz"
+  sha256 "095509b088ed1c3ba452ee0fed4a5f134719ac817ffc594f79557f499ad9fa6b"
   head "https://github.com/vapoursynth/vapoursynth.git"
 
   depends_on "autoconf" => :build
   depends_on "automake" => :build
   depends_on "cython" => :build
   depends_on "libtool" => :build
-  depends_on "nasm" => :build
   depends_on "pkg-config" => :build
 
   depends_on "noctem/custom/ffmpeg"
