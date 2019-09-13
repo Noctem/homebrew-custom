@@ -1,8 +1,8 @@
 class LibtorrentRasterbarAT11 < Formula
   desc "C++ bittorrent library by Rasterbar Software"
   homepage "https://www.libtorrent.org/"
-  url "https://github.com/arvidn/libtorrent/releases/download/libtorrent_1_1_12/libtorrent-rasterbar-1.1.12.tar.gz"
-  sha256 "a5937134edf3ca8c109403a47f5a5fc93f7b8dca4e97f1a629a8c84288bee7a7"
+  url "https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1_13/libtorrent-rasterbar-1.1.13.tar.gz"
+  sha256 "30040719858e3c06634764e0c1778738eb42ecd0b45e814afa746329a948ead7"
 
   head do
     url "https://github.com/arvidn/libtorrent.git", :branch => "RC_1_1"
@@ -16,12 +16,10 @@ class LibtorrentRasterbarAT11 < Formula
   depends_on "pkg-config" => :build
   depends_on "boost"
   depends_on "boost-python3"
-  depends_on "openssl"
+  depends_on "openssl@1.1"
   depends_on "python"
 
   def install
-    ENV['CXXFLAGS'] = "-std=c++11"
-
     args = %W[
       --disable-debug
       --disable-dependency-tracking
