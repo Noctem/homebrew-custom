@@ -20,6 +20,8 @@ class LibtorrentRasterbarAT11 < Formula
   depends_on "python"
 
   def install
+    ENV.cxx11
+
     args = %W[
       --disable-debug
       --disable-dependency-tracking
