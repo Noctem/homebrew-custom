@@ -34,14 +34,15 @@ class Ffmpeg < Formula
   depends_on "noctem/custom/decklink-sdk" => :optional
 
   def install
+    ENV.append_to_cflags "-fno-stack-check" if DevelopmentTools.clang_build_version >= 1010
+
     args = %W[
       --prefix=#{prefix}
       --cc=#{ENV.cc}
-      --host-cflags=#{ENV.cflags}
-      --host-ldflags=#{ENV.ldflags}
-      --enable-avresample
+      --cpu=native
       --enable-ffplay
       --enable-gpl
+      --enable-lto
       --enable-nonfree
       --enable-pthreads
       --enable-shared
