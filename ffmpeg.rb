@@ -31,6 +31,8 @@ class Ffmpeg < Formula
   depends_on "xz"
   depends_on "zimg"
 
+  depends_on "noctem/custom/decklink-sdk" => :optional
+
   def install
     args = %W[
       --prefix=#{prefix}
@@ -67,8 +69,9 @@ class Ffmpeg < Formula
       --enable-videotoolbox
       --disable-libjack
       --disable-indev=jack
-      --enable-decklink
     ]
+
+    args << "--enable-decklink" if build.with?("decklink-sdk")
 
     system "./configure", *args
     system "make", "install"

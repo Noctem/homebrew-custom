@@ -7,7 +7,6 @@ class Rust < Formula
 
   depends_on "cmake" => :build
   depends_on "llvm" => :build
-  depends_on "python@2" => :build
   depends_on "libssh2"
   depends_on "openssl@1.1"
   depends_on "pkg-config"
