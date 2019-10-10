@@ -1,6 +1,3 @@
-# Last check with upstream: fbe5f11471748ac696089a00a2c1396945de3cda
-# https://github.com/Homebrew/homebrew-core/blob/master/Formula/mpv.rb
-
 class MpvIina < Formula
   desc "Media player based on MPlayer and mplayer2"
   homepage "https://mpv.io"
@@ -14,17 +11,15 @@ class MpvIina < Formula
   depends_on "pkg-config" => :build
   depends_on "python" => :build
 
-  depends_on "ffmpeg-iina"
+  depends_on "noctem/custom/ffmpeg-iina"
   depends_on "jpeg"
   depends_on "libarchive"
   depends_on "libass"
   depends_on "little-cms2"
   depends_on "lua@5.1"
   depends_on "libbluray"
-
   depends_on "mujs"
   depends_on "uchardet"
-  # depends_on "vapoursynth"
   depends_on "youtube-dl"
 
   def install

@@ -1,11 +1,8 @@
-# Last check with upstream: 001752dcbd545a39926a2998dde53642634bccad
-# https://github.com/Homebrew/homebrew-core/blob/master/Formula/ffmpeg.rb
-
 class FfmpegIina < Formula
   desc "Play, record, convert, and stream audio and video"
   homepage "https://ffmpeg.org/"
-  url "https://ffmpeg.org/releases/ffmpeg-4.2.tar.xz"
-  sha256 "023f10831a97ad93d798f53a3640e55cd564abfeba807ecbe8524dac4fedecd5"
+  url "https://ffmpeg.org/releases/ffmpeg-4.2.1.tar.xz"
+  sha256 "cec7c87e9b60d174509e263ac4011b522385fd0775292e1670ecc1180c9bb6d4"
   head "https://github.com/FFmpeg/FFmpeg.git"
 
   keg_only "This formula is intended to only be used for building IINA. It is not recommended for daily use."
@@ -29,6 +26,7 @@ class FfmpegIina < Formula
   def install
     args = %W[
       --prefix=#{prefix}
+      --cpu=native
       --enable-shared
       --enable-pthreads
       --enable-version3
@@ -60,12 +58,5 @@ class FfmpegIina < Formula
 
     system "./configure", *args
     system "make", "install"
-  end
-
-  test do
-    # Create an example mp4 file
-    mp4out = testpath/"video.mp4"
-    system bin/"ffmpeg", "-filter_complex", "testsrc=rate=1:duration=1", mp4out
-    assert_predicate mp4out, :exist?
   end
 end
