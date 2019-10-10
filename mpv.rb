@@ -1,15 +1,13 @@
 class Mpv < Formula
   desc "Media player based on MPlayer and mplayer2"
   homepage "https://mpv.io"
-  url "https://github.com/mpv-player/mpv/archive/v0.29.1.tar.gz"
-  sha256 "f9f9d461d1990f9728660b4ccb0e8cb5dce29ccaa6af567bec481b79291ca623"
-  revision 4
   head "https://github.com/mpv-player/mpv.git"
 
   depends_on "docutils" => :build
   depends_on "pkg-config" => :build
   depends_on "python" => :build
 
+  depends_on "vapoursynth" => :recommended
   depends_on "noctem/custom/ffmpeg"
   depends_on "jpeg"
   depends_on "libarchive"
@@ -18,7 +16,6 @@ class Mpv < Formula
   depends_on "lua@5.1"
   depends_on "mujs"
   depends_on "uchardet"
-  depends_on "noctem/custom/vapoursynth"
   depends_on "youtube-dl"
 
   def install
@@ -40,7 +37,6 @@ class Mpv < Formula
       --datadir=#{pkgshare}
       --mandir=#{man}
       --docdir=#{doc}
-      --enable-zsh-comp
       --zshdir=#{zsh_completion}
     ]
 
