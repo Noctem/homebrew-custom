@@ -1,39 +1,54 @@
 class Ffmpeg < Formula
-  desc "ffmpeg with fdk-aac, wavpack, and zimg"
+  desc "Play, record, convert, and stream audio and video"
   homepage "https://ffmpeg.org/"
   url "https://ffmpeg.org/releases/ffmpeg-4.2.1.tar.xz"
   sha256 "cec7c87e9b60d174509e263ac4011b522385fd0775292e1670ecc1180c9bb6d4"
+  revision 1
   head "https://github.com/FFmpeg/FFmpeg.git"
 
   depends_on "nasm" => :build
   depends_on "pkg-config" => :build
   depends_on "texi2html" => :build
 
-  depends_on "aom"
-  depends_on "fdk-aac"
+  depends_on "aom" => :recommended
+  depends_on "fdk-aac" => :recommended
+  depends_on "gnutls" => :recommended
+  depends_on "libass" => :recommended
+  depends_on "libbluray" => :recommended
+  depends_on "rtmpdump" => :recommended
+  depends_on "wavpack" => :recommended
+  depends_on "zimg" => :recommended
+  depends_on "chromaprint" => :optional
+  depends_on "noctem/custom/decklink-sdk" => :optional
+  depends_on "frei0r" => :optional
+  depends_on "libsoxr" => :optional
+  depends_on "libvidstab" => :optional
+  depends_on "opencore-amr" => :optional
+  depends_on "openh264" => :optional
+  depends_on "openjpeg" => :optional
+  depends_on "rubberband" => :optional
+  depends_on "speex" => :optional
+  depends_on "tesseract" => :optional
+  depends_on "webp" => :optional
+  depends_on "xvid" => :optional
   depends_on "fontconfig"
   depends_on "freetype"
-  depends_on "frei0r"
-  depends_on "gnutls"
   depends_on "lame"
-  depends_on "libass"
-  depends_on "libbluray"
   depends_on "libvorbis"
   depends_on "libvpx"
   depends_on "opus"
-  depends_on "rtmpdump"
   depends_on "sdl2"
   depends_on "snappy"
   depends_on "theora"
-  depends_on "wavpack"
   depends_on "x264"
   depends_on "x265"
   depends_on "xz"
-  depends_on "zimg"
-
-  depends_on "noctem/custom/decklink-sdk" => :optional
 
   def install
+    # Work around Xcode 11 clang bug
+    # https://bitbucket.org/multicoreware/x265/issues/514/wrong-code-generated-on-macos-1015
+    ENV.append_to_cflags "-fno-stack-check" if DevelopmentTools.clang_build_version >= 1010
+
     args = %W[
       --prefix=#{prefix}
       --cc=#{ENV.cc}
@@ -41,36 +56,46 @@ class Ffmpeg < Formula
       --enable-ffplay
       --enable-gpl
       --enable-lto
-      --enable-nonfree
       --enable-pthreads
       --enable-shared
       --enable-version3
-      --enable-frei0r
-      --enable-gnutls
-      --enable-libaom
-      --enable-libass
-      --enable-libbluray
-      --enable-libfdk-aac
       --enable-libfontconfig
       --enable-libfreetype
       --enable-libmp3lame
       --enable-libopus
-      --enable-librtmp
       --enable-libsnappy
       --enable-libtheora
       --enable-libvorbis
       --enable-libvpx
-      --enable-libwavpack
       --enable-libx264
       --enable-libx265
-      --enable-libzimg
       --enable-lzma
       --enable-videotoolbox
       --disable-libjack
       --disable-indev=jack
     ]
 
-    args << "--enable-decklink" if build.with?("decklink-sdk")
+    args << "--enable-chromaprint" if build.with? "chromaprint"
+    args << "--enable-decklink" if build.with? "decklink-sdk"
+    args << "--enable-frei0r" if build.with? "frei0r"
+    args << "--enable-gnutls" if build.with? "gnutls"
+    args << "--enable-libaom" if build.with? "aom"
+    args << "--enable-libass" if build.with? "libass"
+    args << "--enable-libbluray" if build.with? "libbluray"
+    args << "--enable-libfdk-aac" << "--enable-nonfree" if build.with? "fdk-aac"
+    args << "--enable-libopencore-amrnb" << "--enable-libopencore-amrwb" if build.with? "opencore-amr"
+    args << "--enable-libopenh264" if build.with? "openh264"
+    args << "--enable-libopenjpeg" if build.with? "openjpeg"
+    args << "--enable-librtmp" if build.with? "rtmpdump"
+    args << "--enable-librubberband" if build.with? "rubberband"
+    args << "--enable-libsoxr" if build.with? "libsoxr"
+    args << "--enable-libspeex" if build.with? "speex"
+    args << "--enable-libtesseract" if build.with? "tesseract"
+    args << "--enable-libvidstab" if build.with? "libvidstab"
+    args << "--enable-libwavpack" if build.with? "wavpack"
+    args << "--enable-libwebp" if build.with? "webp"
+    args << "--enable-libxvid" if build.with? "xvid"
+    args << "--enable-libzimg" if build.with? "zimg"
 
     system "./configure", *args
     system "make", "install"
@@ -78,6 +103,9 @@ class Ffmpeg < Formula
     # Build and install additional FFmpeg tools
     system "make", "alltools"
     bin.install Dir["tools/*"].select { |f| File.executable? f }
+
+    # Fix for Non-executables that were installed to bin/
+    mv bin/"python", pkgshare/"python", :force => true
   end
 
   test do
