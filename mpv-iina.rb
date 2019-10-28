@@ -1,22 +1,20 @@
 class MpvIina < Formula
   desc "Media player based on MPlayer and mplayer2"
   homepage "https://mpv.io"
-  url "https://github.com/mpv-player/mpv/archive/v0.29.1.tar.gz"
-  sha256 "f9f9d461d1990f9728660b4ccb0e8cb5dce29ccaa6af567bec481b79291ca623"
-  revision 4
+  url "https://github.com/mpv-player/mpv/archive/v0.30.0.tar.gz"
+  sha256 "33a1bcb7e74ff17f070e754c15c52228cf44f2cefbfd8f34886ae81df214ca35"
   head "https://github.com/mpv-player/mpv.git"
 
   keg_only "this formula is only used for building IINA, not recommended for daily use"
 
   depends_on "pkg-config" => :build
   depends_on "python" => :build
-
   depends_on "noctem/custom/ffmpeg-iina"
+  depends_on "noctem/custom/lua@5.2"
   depends_on "jpeg"
   depends_on "libarchive"
   depends_on "libass"
   depends_on "little-cms2"
-  depends_on "lua@5.1"
   depends_on "libbluray"
   depends_on "mujs"
   depends_on "uchardet"
@@ -37,7 +35,6 @@ class MpvIina < Formula
       --enable-uchardet
       --enable-libbluray
       --disable-debug-build
-      --disable-swift
       --disable-macos-touchbar
       --disable-manpage-build
       --confdir=#{etc}/mpv

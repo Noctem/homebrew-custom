@@ -24,7 +24,6 @@ class Mpv < Formula
     # or getdefaultlocale in docutils. Force the default c/posix locale since
     # that's good enough for building the manpage.
     ENV["LC_ALL"] = "C"
-    ENV["LDFLAGS"] = "-L/usr/lib/swift"
 
     args = %W[
       --prefix=#{prefix}
