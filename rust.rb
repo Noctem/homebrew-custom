@@ -1,14 +1,18 @@
 class Rust < Formula
   desc "Safe, concurrent, practical language"
   homepage "https://www.rust-lang.org/"
-  url "https://static.rust-lang.org/dist/rustc-1.40.0-src.tar.gz"
-  sha256 "dd97005578defc10a482bff3e4e728350d2099c60ffcf1f5e189540c39a549ad"
+  url "https://static.rust-lang.org/dist/rustc-1.41.0-src.tar.gz"
+  sha256 "5546822c09944c4d847968e9b7b3d0e299f143f307c00fa40e84a99fabf8d74b"
   head "https://github.com/rust-lang/rust.git"
 
   depends_on "cmake" => :build
   depends_on "libssh2"
   depends_on "openssl@1.1"
   depends_on "pkg-config"
+
+  uses_from_macos "binutils"
+  uses_from_macos "curl"
+  uses_from_macos "zlib"
 
   def install
     mv "config.toml.example", "config.toml"
@@ -37,10 +41,6 @@ class Rust < Formula
 
     system "./x.py", "build"
     system "./x.py", "install"
-
-    # Remove any binary files; as Homebrew will run ranlib on them and barf.
-    rm_rf Dir["src/{llvm-project,llvm-emscripten,test,librustdoc,etc/snapshot.pyc}"]
-    (pkgshare/"rust_src").install Dir["src/*"]
 
     rm_rf prefix/"lib/rustlib/uninstall.sh"
     rm_rf prefix/"lib/rustlib/install.log"
