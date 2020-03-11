@@ -17,6 +17,7 @@ class Ffmpeg < Formula
   depends_on "libbluray" => :recommended
   depends_on "rtmpdump" => :recommended
   depends_on "wavpack" => :recommended
+  depends_on "webp" => :recommended
   depends_on "zimg" => :recommended
   depends_on "chromaprint" => :optional
   depends_on "noctem/custom/decklink-sdk" => :optional
@@ -29,7 +30,6 @@ class Ffmpeg < Formula
   depends_on "rubberband" => :optional
   depends_on "speex" => :optional
   depends_on "tesseract" => :optional
-  depends_on "webp" => :optional
   depends_on "xvid" => :optional
   depends_on "fontconfig"
   depends_on "freetype"
