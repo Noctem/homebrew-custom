@@ -45,9 +45,13 @@ class Ffmpeg < Formula
   depends_on "xz"
 
   def install
+    ENV.append "CFLAGS", "-fno-stack-check"
+
     args = %W[
       --prefix=#{prefix}
       --cc=#{ENV.cc}
+      --host-cflags=#{ENV.cflags}
+      --host-ldflags=#{ENV.ldflags}
       --cpu=native
       --enable-ffplay
       --enable-gpl

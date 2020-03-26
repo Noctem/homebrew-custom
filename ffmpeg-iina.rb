@@ -24,6 +24,8 @@ class FfmpegIina < Formula
   depends_on "xz"
 
   def install
+    ENV.append "CFLAGS", "-fno-stack-check"
+
     args = %W[
       --prefix=#{prefix}
       --cpu=native
