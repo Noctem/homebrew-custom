@@ -37,6 +37,7 @@ class MpvIina < Formula
       --enable-libbluray
       --disable-debug-build
       --disable-html-build
+      --disable-swift
       --disable-macos-media-player
       --disable-macos-touchbar
       --disable-manpage-build

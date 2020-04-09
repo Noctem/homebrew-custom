@@ -8,6 +8,7 @@ class Mpv < Formula
   depends_on "docutils" => :build
   depends_on "pkg-config" => :build
   depends_on "python" => :build
+  depends_on :xcode => :build
 
   depends_on "vapoursynth" => :recommended
 
@@ -35,6 +36,7 @@ class Mpv < Formula
       --enable-lua
       --enable-libarchive
       --enable-uchardet
+      --disable-macos-touchbar
       --confdir=#{etc}/mpv
       --datadir=#{pkgshare}
       --mandir=#{man}
