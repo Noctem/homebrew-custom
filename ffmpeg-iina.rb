@@ -1,8 +1,8 @@
 class FfmpegIina < Formula
   desc "Play, record, convert, and stream audio and video"
   homepage "https://ffmpeg.org/"
-  url "https://ffmpeg.org/releases/ffmpeg-4.2.2.tar.xz"
-  sha256 "cb754255ab0ee2ea5f66f8850e1bd6ad5cac1cd855d0a2f4990fb8c668b0d29c"
+  url "https://ffmpeg.org/releases/ffmpeg-4.2.3.tar.xz"
+  sha256 "9df6c90aed1337634c1fb026fb01c154c29c82a64ea71291ff2da9aacb9aad31"
   head "https://github.com/FFmpeg/FFmpeg.git"
 
   keg_only "This formula is intended to only be used for building IINA. It is not recommended for daily use."
@@ -11,7 +11,7 @@ class FfmpegIina < Formula
   depends_on "pkg-config" => :build
   depends_on "texi2html" => :build
 
-  depends_on "aom"
+  depends_on "dav1d"
   depends_on "fontconfig"
   depends_on "freetype"
   depends_on "gnutls"
@@ -40,8 +40,8 @@ class FfmpegIina < Formula
       --enable-gnutls
       --enable-nonfree
       --enable-gpl
-      --enable-libaom
       --enable-libbluray
+      --enable-libdav1d
       --enable-librubberband
       --enable-libsnappy
       --enable-libfontconfig

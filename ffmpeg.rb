@@ -1,24 +1,25 @@
 class Ffmpeg < Formula
   desc "Play, record, convert, and stream audio and video"
   homepage "https://ffmpeg.org/"
-  url "https://ffmpeg.org/releases/ffmpeg-4.2.2.tar.xz"
-  sha256 "cb754255ab0ee2ea5f66f8850e1bd6ad5cac1cd855d0a2f4990fb8c668b0d29c"
+  url "https://ffmpeg.org/releases/ffmpeg-4.2.3.tar.xz"
+  sha256 "9df6c90aed1337634c1fb026fb01c154c29c82a64ea71291ff2da9aacb9aad31"
   head "https://github.com/FFmpeg/FFmpeg.git"
-  revision 2
 
   depends_on "nasm" => :build
   depends_on "pkg-config" => :build
   depends_on "texi2html" => :build
 
-  depends_on "aom" => :recommended
+  depends_on "dav1d" => :recommended
   depends_on "fdk-aac" => :recommended
   depends_on "gnutls" => :recommended
   depends_on "libass" => :recommended
   depends_on "libbluray" => :recommended
   depends_on "rtmpdump" => :recommended
+  depends_on "srt" => :recommended
   depends_on "wavpack" => :recommended
   depends_on "webp" => :recommended
   depends_on "zimg" => :recommended
+  depends_on "aom" => :optional
   depends_on "chromaprint" => :optional
   depends_on "noctem/custom/decklink-sdk" => :optional
   depends_on "frei0r" => :optional
@@ -82,6 +83,7 @@ class Ffmpeg < Formula
     args << "--enable-libaom" if build.with? "aom"
     args << "--enable-libass" if build.with? "libass"
     args << "--enable-libbluray" if build.with? "libbluray"
+    args << "--enable-libdav1d" if build.with? "dav1d"
     args << "--enable-libfdk-aac" << "--enable-nonfree" if build.with? "fdk-aac"
     args << "--enable-libopencore-amrnb" << "--enable-libopencore-amrwb" if build.with? "opencore-amr"
     args << "--enable-libopenh264" if build.with? "openh264"
@@ -89,6 +91,7 @@ class Ffmpeg < Formula
     args << "--enable-librtmp" if build.with? "rtmpdump"
     args << "--enable-librubberband" if build.with? "rubberband"
     args << "--enable-libsoxr" if build.with? "libsoxr"
+    args << "--enable-libsrt" if build.with? "srt"
     args << "--enable-libspeex" if build.with? "speex"
     args << "--enable-libtesseract" if build.with? "tesseract"
     args << "--enable-libvidstab" if build.with? "libvidstab"
