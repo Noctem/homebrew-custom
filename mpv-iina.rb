@@ -9,7 +9,7 @@ class MpvIina < Formula
   keg_only "this formula is only used for building IINA, not recommended for daily use"
 
   depends_on "pkg-config" => :build
-  depends_on "python" => :build
+  depends_on "python@3.8" => :build
 
   depends_on "noctem/custom/ffmpeg-iina"
   depends_on "noctem/custom/lua@5.2"

@@ -19,7 +19,7 @@ class Opencv < Formula
   depends_on "openblas"
   depends_on "openexr"
   depends_on "protobuf"
-  depends_on "python"
+  depends_on "python@3.8"
   depends_on "tbb"
   depends_on "webp"
 
