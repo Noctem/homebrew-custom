@@ -1,8 +1,8 @@
 class Rust < Formula
   desc "Safe, concurrent, practical language"
   homepage "https://www.rust-lang.org/"
-  url "https://static.rust-lang.org/dist/rustc-1.44.1-src.tar.gz"
-  sha256 "7e2e64cb298dd5d5aea52eafe943ba0458fa82f2987fdcda1ff6f537b6f88473"
+  url "https://static.rust-lang.org/dist/rustc-1.45.0-src.tar.gz"
+  sha256 "ba0495f12c7d4e8735f3fa9e036bfafd1ae58c26910393201e95b9d13c80cd7c"
   head "https://github.com/rust-lang/rust.git"
 
   depends_on "cmake" => :build
