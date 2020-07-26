@@ -54,6 +54,7 @@ class Ffmpeg < Formula
       --cpu=native
       --enable-ffplay
       --enable-gpl
+      --enable-gray
       --enable-lto
       --enable-pthreads
       --enable-shared
