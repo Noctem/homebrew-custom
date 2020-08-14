@@ -23,6 +23,7 @@ class Ffmpeg < Formula
   depends_on "chromaprint" => :optional
   depends_on "noctem/custom/decklink-sdk" => :optional
   depends_on "frei0r" => :optional
+  depends_on "libmysofa" => :optional
   depends_on "libsoxr" => :optional
   depends_on "libvidstab" => :optional
   depends_on "opencore-amr" => :optional
@@ -84,6 +85,7 @@ class Ffmpeg < Formula
     args << "--enable-libbluray" if build.with? "libbluray"
     args << "--enable-libdav1d" if build.with? "dav1d"
     args << "--enable-libfdk-aac" << "--enable-nonfree" if build.with? "fdk-aac"
+    args << "--enable-libmysofa" if build.with? "libmysofa"
     args << "--enable-libopencore-amrnb" << "--enable-libopencore-amrwb" if build.with? "opencore-amr"
     args << "--enable-libopenh264" if build.with? "openh264"
     args << "--enable-libopenjpeg" if build.with? "openjpeg"
