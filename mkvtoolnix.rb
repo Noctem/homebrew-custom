@@ -1,8 +1,14 @@
 class Mkvtoolnix < Formula
   desc "Matroska media files manipulation tools"
   homepage "https://mkvtoolnix.download/"
-  url "https://mkvtoolnix.download/sources/mkvtoolnix-49.0.0.tar.xz"
-  sha256 "9de7936d398581872ef572f0c8b6948966de6ec7791ac04340996ee0155bc75a"
+  url "https://mkvtoolnix.download/sources/mkvtoolnix-50.0.0.tar.xz"
+  sha256 "58a5d2c134e476386a1b391913d68d3e1c51dba70f6a33ca4b39c7b61c2e8824"
+  license "GPL-2.0"
+
+  livecheck do
+    url "https://mkvtoolnix.download/sources/"
+    regex(/href=.*?mkvtoolnix[._-]v?(\d+(?:\.\d+)+)\.t/i)
+  end
 
   head do
     url "https://gitlab.com/mbunkus/mkvtoolnix.git"
@@ -24,8 +30,9 @@ class Mkvtoolnix < Formula
   depends_on "libmatroska"
   depends_on "libogg"
   depends_on "libvorbis"
-  depends_on "qt"
   depends_on macos: :mojave # C++17
+  depends_on "pcre2"
+  depends_on "qt"
 
   uses_from_macos "libxslt" => :build
   uses_from_macos "ruby" => :build
