@@ -3,13 +3,18 @@ class FfmpegIina < Formula
   homepage "https://ffmpeg.org/"
   url "https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.xz"
   sha256 "ad009240d46e307b4e03a213a0f49c11b650e445b1f8be0dda2a9212b34d2ffb"
+  license "GPL-2.0"
   head "https://github.com/FFmpeg/FFmpeg.git"
+
+  livecheck do
+    url "https://ffmpeg.org/download.html"
+    regex(/href=.*?ffmpeg[._-]v?(\d+(?:\.\d+)+)\.t/i)
+  end
 
   keg_only "This formula is intended to only be used for building IINA. It is not recommended for daily use."
 
   depends_on "nasm" => :build
   depends_on "pkg-config" => :build
-  depends_on "texi2html" => :build
 
   depends_on "dav1d"
   depends_on "fontconfig"

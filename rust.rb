@@ -4,6 +4,7 @@ class Rust < Formula
   url "https://static.rust-lang.org/dist/rustc-1.46.0-src.tar.gz"
   sha256 "2d6a3b7196db474ba3f37b8f5d50a1ecedff00738d7846840605b42bfc922728"
   head "https://github.com/rust-lang/rust.git"
+  license any_of: ["Apache-2.0", "MIT"]
 
   depends_on "cmake" => :build
   depends_on "python@3.8" => :build

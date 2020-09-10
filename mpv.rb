@@ -3,13 +3,14 @@ class Mpv < Formula
   homepage "https://mpv.io"
   url "https://github.com/mpv-player/mpv/archive/v0.32.0.tar.gz"
   sha256 "9163f64832226d22e24bbc4874ebd6ac02372cd717bef15c28a0aa858c5fe592"
+  license "GPL-2.0"
   revision 2
   head "https://github.com/mpv-player/mpv.git"
 
   depends_on "docutils" => :build
   depends_on "pkg-config" => :build
   depends_on "python@3.8" => :build
-  depends_on :xcode => :build
+  depends_on xcode: :build
 
   depends_on "vapoursynth" => :recommended
 
@@ -28,6 +29,9 @@ class Mpv < Formula
     # or getdefaultlocale in docutils. Force the default c/posix locale since
     # that's good enough for building the manpage.
     ENV["LC_ALL"] = "C"
+    
+    # libarchive is keg-only
+    ENV.prepend_path "PKG_CONFIG_PATH", Formula["libarchive"].opt_lib/"pkgconfig"
 
     args = %W[
       --prefix=#{prefix}
