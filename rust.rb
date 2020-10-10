@@ -1,13 +1,13 @@
 class Rust < Formula
   desc "Safe, concurrent, practical language"
   homepage "https://www.rust-lang.org/"
-  url "https://static.rust-lang.org/dist/rustc-1.46.0-src.tar.gz"
-  sha256 "2d6a3b7196db474ba3f37b8f5d50a1ecedff00738d7846840605b42bfc922728"
+  url "https://static.rust-lang.org/dist/rustc-1.47.0-src.tar.gz"
+  sha256 "3185df064c4747f2c8b9bb8c4468edd58ff4ad6d07880c879ac1b173b768d81d"
   head "https://github.com/rust-lang/rust.git"
   license any_of: ["Apache-2.0", "MIT"]
 
   depends_on "cmake" => :build
-  depends_on "python@3.8" => :build
+  depends_on "python@3.9" => :build
   depends_on "libssh2"
   depends_on "openssl@1.1"
   depends_on "pkg-config"
@@ -40,8 +40,8 @@ class Rust < Formula
     # expected ';' after top level declarator" among other errors on 10.12
     ENV["SDKROOT"] = MacOS.sdk_path
 
-    system Formula["python@3.8"].bin/"python3", "x.py", "build"
-    system Formula["python@3.8"].bin/"python3", "x.py", "install"
+    system Formula["python@3.9"].bin/"python3", "x.py", "build"
+    system Formula["python@3.9"].bin/"python3", "x.py", "install"
 
     rm_rf prefix/"lib/rustlib/uninstall.sh"
     rm_rf prefix/"lib/rustlib/install.log"
