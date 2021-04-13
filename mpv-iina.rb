@@ -1,9 +1,9 @@
 class MpvIina < Formula
   desc "Media player based on MPlayer and mplayer2"
   homepage "https://mpv.io"
-  url "https://github.com/mpv-player/mpv/archive/v0.33.0.tar.gz"
-  sha256 "f1b9baf5dc2eeaf376597c28a6281facf6ed98ff3d567e3955c95bf2459520b4"
-  license "GPL-2.0"
+  url "https://github.com/mpv-player/mpv/archive/v0.33.1.tar.gz"
+  sha256 "100a116b9f23bdcda3a596e9f26be3a69f166a4f1d00910d1789b6571c46f3a9"
+  license :cannot_represent
   head "https://github.com/mpv-player/mpv.git"
 
   keg_only "this formula is only used for building IINA, not recommended for daily use"
@@ -12,7 +12,7 @@ class MpvIina < Formula
   depends_on "python@3.9" => :build
 
   depends_on "noctem/custom/ffmpeg-iina"
-  depends_on "noctem/custom/lua@5.2"
+  depends_on "luajit-openresty"
   depends_on "jpeg"
   depends_on "libarchive"
   depends_on "libass"
@@ -30,6 +30,8 @@ class MpvIina < Formula
 
     # libarchive is keg-only
     ENV.prepend_path "PKG_CONFIG_PATH", Formula["libarchive"].opt_lib/"pkgconfig"
+    # luajit-openresty is keg-only
+    ENV.prepend_path "PKG_CONFIG_PATH", Formula["luajit-openresty"].opt_lib/"pkgconfig"
 
     args = %W[
       --prefix=#{prefix}
@@ -49,11 +51,12 @@ class MpvIina < Formula
       --datadir=#{pkgshare}
       --mandir=#{man}
       --docdir=#{doc}
+      --lua=luajit
     ]
 
-    system "python3", "bootstrap.py"
-    system "python3", "waf", "configure", *args
-    system "python3", "waf", "install"
+    system Formula["python@3.9"].opt_bin/"python3", "bootstrap.py"
+    system Formula["python@3.9"].opt_bin/"python3", "waf", "configure", *args
+    system Formula["python@3.9"].opt_bin/"python3", "waf", "install"
   end
 
   test do

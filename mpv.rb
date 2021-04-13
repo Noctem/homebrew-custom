@@ -1,9 +1,9 @@
 class Mpv < Formula
   desc "Media player based on MPlayer and mplayer2"
   homepage "https://mpv.io"
-  url "https://github.com/mpv-player/mpv/archive/v0.33.0.tar.gz"
-  sha256 "f1b9baf5dc2eeaf376597c28a6281facf6ed98ff3d567e3955c95bf2459520b4"
-  license "GPL-2.0"
+  url "https://github.com/mpv-player/mpv/archive/v0.33.1.tar.gz"
+  sha256 "100a116b9f23bdcda3a596e9f26be3a69f166a4f1d00910d1789b6571c46f3a9"
+  license :cannot_represent
   head "https://github.com/mpv-player/mpv.git"
 
   depends_on "docutils" => :build
@@ -14,11 +14,11 @@ class Mpv < Formula
   depends_on "vapoursynth" => :recommended
 
   depends_on "noctem/custom/ffmpeg"
-  depends_on "noctem/custom/lua@5.2"
   depends_on "jpeg"
   depends_on "libarchive"
   depends_on "libass"
   depends_on "little-cms2"
+  depends_on "luajit-openresty"
   depends_on "mujs"
   depends_on "uchardet"
   depends_on "youtube-dl"
@@ -31,6 +31,8 @@ class Mpv < Formula
     
     # libarchive is keg-only
     ENV.prepend_path "PKG_CONFIG_PATH", Formula["libarchive"].opt_lib/"pkgconfig"
+    # luajit-openresty is keg-only
+    ENV.prepend_path "PKG_CONFIG_PATH", Formula["luajit-openresty"].opt_lib/"pkgconfig"
 
     args = %W[
       --prefix=#{prefix}
@@ -46,13 +48,14 @@ class Mpv < Formula
       --mandir=#{man}
       --docdir=#{doc}
       --zshdir=#{zsh_completion}
+      --lua=luajit
     ]
 
-    system "python3", "bootstrap.py"
-    system "python3", "waf", "configure", *args
-    system "python3", "waf", "install"
+    system Formula["python@3.9"].opt_bin/"python3", "bootstrap.py"
+    system Formula["python@3.9"].opt_bin/"python3", "waf", "configure", *args
+    system Formula["python@3.9"].opt_bin/"python3", "waf", "install"
 
-    system "python3", "TOOLS/osxbundle.py", "build/mpv"
+    system Formula["python@3.9"].opt_bin/"python3", "TOOLS/osxbundle.py", "build/mpv"
     prefix.install "build/mpv.app"
   end
 
