@@ -1,8 +1,8 @@
 class Rust < Formula
   desc "Safe, concurrent, practical language"
   homepage "https://www.rust-lang.org/"
-  url "https://static.rust-lang.org/dist/rustc-1.48.0-src.tar.gz"
-  sha256 "0e763e6db47d5d6f91583284d2f989eacc49b84794d1443355b85c58d67ae43b"
+  url "https://static.rust-lang.org/dist/rustc-1.51.0-src.tar.gz"
+  sha256 "7a6b9bafc8b3d81bbc566e7c0d1f17c9f499fd22b95142f7ea3a8e4d1f9eb847"
   head "https://github.com/rust-lang/rust.git"
   license any_of: ["Apache-2.0", "MIT"]
 
@@ -15,9 +15,6 @@ class Rust < Formula
 
   uses_from_macos "curl"
   uses_from_macos "zlib"
-
-  # fix compilation with `-Ctarget-cpu=native`
-  patch :DATA
 
   def install
     mv "config.toml.example", "config.toml"
@@ -73,32 +70,3 @@ class Rust < Formula
                  (testpath/"hello_world").cd { `#{bin}/cargo run`.split("\n").last }
   end
 end
-__END__
-diff --git a/compiler/rustc_codegen_llvm/src/type_of.rs b/compiler/rustc_codegen_llvm/src/type_of.rs
-index 8ea4768f77dbd..0876907e1194b 100644
---- a/compiler/rustc_codegen_llvm/src/type_of.rs
-+++ b/compiler/rustc_codegen_llvm/src/type_of.rs
-@@ -40,9 +40,7 @@ fn uncached_llvm_type<'a, 'tcx>(
-         // FIXME(eddyb) producing readable type names for trait objects can result
-         // in problematically distinct types due to HRTB and subtyping (see #47638).
-         // ty::Dynamic(..) |
--        ty::Adt(..) | ty::Closure(..) | ty::Foreign(..) | ty::Generator(..) | ty::Str
--            if !cx.sess().fewer_names() =>
--        {
-+        ty::Adt(..) | ty::Closure(..) | ty::Foreign(..) | ty::Generator(..) | ty::Str => {
-             let mut name = with_no_trimmed_paths(|| layout.ty.to_string());
-             if let (&ty::Adt(def, _), &Variants::Single { index }) =
-                 (layout.ty.kind(), &layout.variants)
-@@ -58,12 +56,6 @@ fn uncached_llvm_type<'a, 'tcx>(
-             }
-             Some(name)
-         }
--        ty::Adt(..) => {
--            // If `Some` is returned then a named struct is created in LLVM. Name collisions are
--            // avoided by LLVM (with increasing suffixes). If rustc doesn't generate names then that
--            // can improve perf.
--            Some(String::new())
--        }
-         _ => None,
-     };
- 
