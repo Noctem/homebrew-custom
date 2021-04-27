@@ -4,6 +4,7 @@ class Ffmpeg < Formula
   url "https://ffmpeg.org/releases/ffmpeg-4.4.tar.xz"
   sha256 "06b10a183ce5371f915c6bb15b7b1fffbe046e8275099c96affc29e17645d909"
   license "GPL-2.0-or-later"
+  revision 1
   head "https://github.com/FFmpeg/FFmpeg.git"
 
   livecheck do
@@ -20,7 +21,6 @@ class Ffmpeg < Formula
   depends_on "libass" => :recommended
   depends_on "libbluray" => :recommended
   depends_on "srt" => :recommended
-  depends_on "wavpack" => :recommended
   depends_on "webp" => :recommended
   depends_on "zimg" => :recommended
   depends_on "aom" => :optional
@@ -97,7 +97,6 @@ class Ffmpeg < Formula
     args << "--enable-libspeex" if build.with? "speex"
     args << "--enable-libtesseract" if build.with? "tesseract"
     args << "--enable-libvidstab" if build.with? "libvidstab"
-    args << "--enable-libwavpack" if build.with? "wavpack"
     args << "--enable-libwebp" if build.with? "webp"
     args << "--enable-libxvid" if build.with? "xvid"
     args << "--enable-libzimg" if build.with? "zimg"
